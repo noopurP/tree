@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import sys
+# -*- coding: UTF-8 -*-
 import os
 from os import listdir, sep
 from os.path import abspath, basename, isdir, isfile
@@ -13,43 +14,35 @@ def tree(dir, padding):
     count = 0
     for f in content:
         count = count + 1
-		if not f.startswith('.'):
-            if count == len(content):
+        if not f.startswith('.'):
+            if count != len(content):
+                print(padding + "├── " + f)
+            else:
                 print(padding + "└── " + f)
-                if isdir(os.path.realpath(dir + '/' + f)):
-                    global totdir
-                    totdir = totdir + 1
-                    padding = padding + "   "
-                    padding = tree(os.path.realpath(dir + '/' + f), padding)
-                else:
-                    global totfil
-                    totfil = totfil + 1
+            if isdir(os.path.realpath(dir + '/' + f)):
+                global totdir
+                totdir = totdir + 1
+                padding = padding + "│   "
+                padding = tree(os.path.realpath(dir + '/' + f), padding)
+            else:
+                global totfil
+                totfil = totfil + 1
+            if count == len(content):
                 str = []
                 str = padding.rpartition("│")
                 padding = str[0]
                 return padding
-            else:
-                print (padding + "├── " + f)
-                if isdir(os.path.realpath(dir + '/' + f)):
-                    global totdir
-                    totdir = totdir + 1
-                    padding = padding + "│   "
-                    padding = tree(os.path.realpath(dir + '/' + f), padding)
-                else:
-                    global totfil
-                    totfil = totfil + 1
 
 
 def main():
-    if len(sys.argv) <= 1:
-        print (".")
+    if len(sys.argv) == 1:
+        print(".")
         tree(".", '')
     else:
         path = os.path.realpath(sys.argv[1])
-        print (sys.argv[1])
+        print(sys.argv[1])
         tree(path, '')
     print("")
-    print (totdir, "directories,", totfil, "files")
-		
+    print(totdir, "directories,", totfil, "files")
 if __name__ == '__main__':
     main()
