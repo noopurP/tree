@@ -6,6 +6,7 @@ from os import listdir, sep
 from os.path import abspath, basename, isdir, isfile
 from sys import argv
 
+
 def tree(dir, padding):
     content = os.listdir(dir)
     count = 0
@@ -27,8 +28,8 @@ def tree(dir, padding):
                     padding = padding + "│   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
 
+
 def main():
-    
     if len(sys.argv) == 1:
         path = os.getcwd()
         print(".")
