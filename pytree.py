@@ -17,17 +17,24 @@ def tree(dir, padding):
         if not f.startswith('.'):
             if count != len(content):
                 print(padding + "├── " + f)
+                if isdir(os.path.realpath(dir + '/' + f)):
+                    global totdir
+                    totdir = totdir + 1
+                    padding = padding + "│   "
+                    padding = tree(os.path.realpath(dir + '/' + f), padding)
+                else:
+                    global totfil
+                    totfil = totfil + 1
             else:
                 print(padding + "└── " + f)
-            if isdir(os.path.realpath(dir + '/' + f)):
-                global totdir
-                totdir = totdir + 1
-                padding = padding + "│   "
-                padding = tree(os.path.realpath(dir + '/' + f), padding)
-            else:
-                global totfil
-                totfil = totfil + 1
-            if count == len(content):
+                if isdir(os.path.realpath(dir + '/' + f)):
+                    global totdir
+                    totdir = totdir + 1
+                    padding = padding + "   "
+                    padding = tree(os.path.realpath(dir + '/' + f), padding)
+                else:
+                    global totfil
+                    totfil = totfil + 1
                 str = []
                 str = padding.rpartition("│")
                 padding = str[0]
@@ -35,7 +42,7 @@ def tree(dir, padding):
 
 
 def main():
-    if len(sys.argv) == 1:
+    if len(sys.argv) <= 1:
         print(".")
         tree(".", '')
     else:
