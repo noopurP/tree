@@ -19,22 +19,18 @@ def tree(dir, padding):
             if count != len(content):
                 print(padding + "├── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
-                    global totdir
                     totdir = totdir + 1
                     padding = padding + "│   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
                 else:
-                    global totfil
                     totfil = totfil + 1
             else:
                 print(padding + "└── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
-                    global totdir
                     totdir = totdir + 1
                     padding = padding + "   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
                 else:
-                    global totfil
                     totfil = totfil + 1
                 str = []
                 str = padding.rpartition("│")
@@ -46,7 +42,7 @@ if __name__ == '__main__':
     global totdir
     global totfil
     totdir = 0
-    totfil =0
+    totfil = 0
     if len(sys.argv) <= 1:
         print(".")
         tree(".", '')
