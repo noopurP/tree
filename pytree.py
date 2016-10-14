@@ -5,6 +5,8 @@ import os
 from os import listdir, sep
 from os.path import abspath, basename, isdir, isfile
 from sys import argv
+totdir = 0
+totfil = 0
 
 
 def tree(dir, padding):
@@ -16,8 +18,13 @@ def tree(dir, padding):
             if count == len(content):
                 print(padding + "└── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
+                    global totdir
+                    totdir = totdir + 1
                     padding = padding + "   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
+                else:
+                    global totfil
+                    totfil = totfil + 1
                 str = []
                 str = padding.rpartition("│")
                 padding = str[0]
@@ -25,8 +32,13 @@ def tree(dir, padding):
             else:
                 print(padding + "├── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
+                    global totdir
+                    totdir = totdir + 1
                     padding = padding + "│   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
+                else:
+                    global totfil
+                    totfil = totfil + 1
 
 
 def main():
