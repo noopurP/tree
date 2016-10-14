@@ -50,5 +50,7 @@ def main():
         path = os.path.realpath(sys.argv[1])
         print(sys.argv[1])
         tree(path, '')
+    print("")
+    print(totdir, "directories,", totfil, "files")
 if __name__ == '__main__':
     main()
