@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 import sys
-# -*- coding: UTF-8 -*-
 import os
 from os import listdir, sep
 from os.path import abspath, basename, isdir, isfile
@@ -14,8 +13,8 @@ def tree(dir, padding):
     count = 0
     for f in content:
         count = count + 1
-        if not f.startswith('.'): #Removing hidden files
-            if count == len (content):
+		if not f.startswith('.'):
+            if count == len(content):
                 print(padding + "└── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
                     global totdir
@@ -39,18 +38,18 @@ def tree(dir, padding):
                 else:
                     global totfil
                     totfil = totfil + 1
-                return padding
 
 
 def main():
     if len(sys.argv) <= 1:
-        print(".")
+        print (".")
         tree(".", '')
     else:
         path = os.path.realpath(sys.argv[1])
-        print(sys.argv[1])
+        print (sys.argv[1])
         tree(path, '')
     print("")
-    print(totdir, "directories,", totfil, "files")
+    print (totdir, "directories,", totfil, "files")
+		
 if __name__ == '__main__':
     main()
