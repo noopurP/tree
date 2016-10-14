@@ -5,11 +5,12 @@ import os
 from os import listdir, sep
 from os.path import abspath, basename, isdir, isfile
 from sys import argv
-totdir = 0
-totfil = 0
+global totdir, totfil
 
 
 def tree(dir, padding):
+    global totdir
+    global totfil
     content = os.listdir(dir)
     count = 0
     for f in content:
@@ -41,7 +42,11 @@ def tree(dir, padding):
                 return padding
 
 
-def main():
+if __name__ == '__main__':
+    global totdir
+    global totfil
+    totdir = 0
+    totfil =0
     if len(sys.argv) <= 1:
         print(".")
         tree(".", '')
@@ -51,5 +56,3 @@ def main():
         tree(path, '')
     print("")
     print(totdir, "directories,", totfil, "files")
-if __name__ == '__main__':
-    main()
