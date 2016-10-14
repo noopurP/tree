@@ -7,28 +7,25 @@ from os.path import abspath, basename, isdir, isfile
 from sys import argv
 
 def tree(dir, padding):
-	content = os.listdir(dir)
-	count = 0
-	#print (os.listdir(dir+'/bites'))
-	for f in content: #Running through list of subdirs, files
-		count = count + 1
-		if not f.startswith('.'): #Removing hidden files
-			if count == len (content):
-				print(padding + "└── " + f)
-				if isdir(os.path.realpath(dir + '/' + f)):
-					padding = padding + "│   "
-					#print (os.path.realpath(dir + '/' + f), isdir(os.path.realpath(dir + '/' + f)))
-					padding = tree(os.path.realpath(dir + '/' + f), padding)
-				str = []
-				str = padding.rpartition("│")
-				padding = str[0]
-				return padding
-			else:
-				print (padding + "├── " + f)
-			if isdir(os.path.realpath(dir + '/' + f)):
-				padding = padding + "│   "
-				#print (os.path.realpath(dir + '/' + f), isdir(os.path.realpath(dir + '/' + f)))
-				padding = tree(os.path.realpath(dir + '/' + f), padding)
+    content = os.listdir(dir)
+    count = 0
+    for f in content: 
+        count = count + 1
+        if not f.startswith('.'): 
+            if count == len (content):
+                print(padding + "└── " + f)
+                if isdir(os.path.realpath(dir + '/' + f)):
+                    padding = padding + "│   "
+                    padding = tree(os.path.realpath(dir + '/' + f), padding)
+                str = []
+                str = padding.rpartition("│")
+                padding = str[0]
+                return padding
+            else:
+                print (padding + "├── " + f)
+                if isdir(os.path.realpath(dir + '/' + f)):
+                    padding = padding + "│   "
+                    padding = tree(os.path.realpath(dir + '/' + f), padding)
 
 def main():
     if len(sys.argv) == 1:
