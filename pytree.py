@@ -9,10 +9,10 @@ from sys import argv
 def tree(dir, padding):
     content = os.listdir(dir)
     count = 0
-    for f in content: 
+    for f in content:
         count = count + 1
-        if not f.startswith('.'): 
-            if count == len (content):
+        if not f.startswith('.'):
+            if count == len(content):
                 print(padding + "└── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
                     padding = padding + "│   "
@@ -22,19 +22,20 @@ def tree(dir, padding):
                 padding = str[0]
                 return padding
             else:
-                print (padding + "├── " + f)
+                print(padding + "├── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
                     padding = padding + "│   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
 
 def main():
+    
     if len(sys.argv) == 1:
         path = os.getcwd()
-        print (".")
+        print(".")
         tree(path, ' ')
     else:
         path = os.path.realpath(sys.argv[1])
-        print (sys.argv[1])
+        print(sys.argv[1])
         tree(path, ' ')
 if __name__ == '__main__':
     main()
