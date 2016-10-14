@@ -16,7 +16,7 @@ def tree(dir, padding):
             if count == len(content):
                 print(padding + "└── " + f)
                 if isdir(os.path.realpath(dir + '/' + f)):
-                    padding = padding + "│   "
+                    padding = padding + "   "
                     padding = tree(os.path.realpath(dir + '/' + f), padding)
                 str = []
                 str = padding.rpartition("│")
@@ -33,10 +33,10 @@ def main():
     if len(sys.argv) == 1:
         path = os.getcwd()
         print(".")
-        tree(path, ' ')
+        tree(path, '')
     else:
         path = os.path.realpath(sys.argv[1])
         print(sys.argv[1])
-        tree(path, ' ')
+        tree(path, '')
 if __name__ == '__main__':
     main()
